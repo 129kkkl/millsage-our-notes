@@ -1,0 +1,334 @@
+/* ==========================================================================
+   MUSIC
+   ========================================================================== */
+
+.music {
+  position: relative;
+  background: linear-gradient(180deg, var(--paper-warm), var(--paper-cool) 60%, var(--paper-mist));
+  overflow: clip;
+}
+
+.music__bed {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 27px,
+      var(--hairline-soft) 27px 28px
+    ),
+    linear-gradient(180deg, transparent 62%, rgba(255, 255, 255, 0.7));
+  opacity: 0.8;
+}
+
+.music__lede-warn {
+  display: block;
+  margin-top: 8px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
+.music__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 24px;
+  padding-bottom: 16px;
+  margin-bottom: clamp(28px, 3.4vw, 48px);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.music__filters {
+  display: flex;
+  gap: clamp(10px, 1.8vw, 26px);
+}
+
+.music__filter {
+  position: relative;
+  padding: 8px 0;
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  color: var(--ink-3);
+  transition:
+    color var(--t-fast) var(--ease-out),
+    letter-spacing var(--t-mid) var(--ease-out);
+}
+
+.music__filter::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-mid) var(--ease-out);
+}
+
+.music__filter:hover {
+  color: var(--ink-2);
+  letter-spacing: 0.27em;
+}
+
+.music__filter[data-active='true'] {
+  color: var(--ink);
+}
+
+.music__filter[data-active='true']::after {
+  transform: scaleX(1);
+  opacity: 0.6;
+}
+
+.music__count {
+  text-transform: none;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+
+/* ---- 状态 ---- */
+
+.music__state {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  padding: clamp(30px, 4vw, 56px);
+  border: 1px solid var(--hairline);
+  max-width: 68ch;
+}
+
+.music__state--error {
+  border-color: color-mix(in srgb, var(--danger) 45%, transparent);
+  background: color-mix(in srgb, var(--danger) 6%, transparent);
+}
+
+.music__state-en {
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  color: var(--ink);
+}
+
+.music__state-zh {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--ink-2);
+}
+
+.music__problems {
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--danger);
+}
+
+/* ---- 网格 ---- */
+
+.music__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 3vw, 52px) clamp(24px, 3.4vw, 60px);
+}
+
+.trk {
+  display: grid;
+  grid-template-columns: minmax(120px, 168px) 1fr;
+  gap: clamp(16px, 1.8vw, 28px);
+  align-items: start;
+  padding-bottom: clamp(26px, 3vw, 40px);
+  border-bottom: 1px solid var(--hairline-soft);
+  min-width: 0;
+}
+
+.trk__sleeve {
+  min-width: 0;
+}
+
+.trk__body {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.trk__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.trk__type {
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  padding: 2px 8px;
+  border: 1px solid currentColor;
+}
+
+.trk__type--original {
+  color: var(--ink-2);
+  background: color-mix(in srgb, var(--gold) 26%, transparent);
+}
+
+.trk__type--cover {
+  color: var(--ink-3);
+  border-style: dashed;
+}
+
+.trk__release,
+.trk__date {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--ink-4);
+}
+
+.trk__title {
+  font-size: clamp(19px, 1.9vw, 27px);
+  line-height: 1.32;
+  color: var(--ink);
+}
+
+.trk__en {
+  display: grid;
+  gap: 2px;
+}
+
+.trk__en-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.trk__en-note {
+  font-size: 10px;
+  line-height: 1.6;
+  color: var(--ink-4);
+}
+
+.trk__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.trk__summary {
+  font-size: 12.5px;
+  line-height: 1.95;
+  color: var(--ink-2);
+}
+
+.trk__reading {
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px;
+  background: color-mix(in srgb, var(--paper-mist) 55%, transparent);
+  border-left: 2px solid var(--prism);
+}
+
+.trk__reading-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trk__reading-text {
+  font-size: 13px;
+  line-height: 2;
+  color: var(--ink-2);
+}
+
+.trk__counter {
+  font-size: 11.5px;
+  line-height: 1.85;
+  color: var(--ink-3);
+  padding-top: 6px;
+  border-top: 1px dashed var(--hairline);
+}
+
+.trk__links {
+  padding-top: 2px;
+}
+
+/* ---- skeleton ---- */
+
+.trk--skeleton {
+  pointer-events: none;
+}
+
+.trk__sk {
+  display: block;
+  background: linear-gradient(
+    90deg,
+    var(--paper-mist) 0%,
+    color-mix(in srgb, var(--silver) 60%, var(--paper-mist)) 50%,
+    var(--paper-mist) 100%
+  );
+  background-size: 200% 100%;
+  animation: sk 1.6s linear infinite;
+}
+
+.trk__sk--sleeve {
+  aspect-ratio: 1;
+  grid-column: 1;
+  grid-row: 1 / span 4;
+}
+
+.trk__sk--line {
+  height: 14px;
+  width: 70%;
+}
+
+.trk__sk--short {
+  width: 40%;
+}
+
+.trk__sk--block {
+  height: 78px;
+  width: 100%;
+}
+
+@keyframes sk {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.music__foot {
+  margin-top: clamp(34px, 4vw, 56px);
+  padding-top: 20px;
+  border-top: 1px solid var(--hairline);
+  max-width: 88ch;
+}
+
+.music__foot .micro {
+  text-transform: none;
+  letter-spacing: 0.04em;
+  line-height: 1.9;
+  color: var(--ink-3);
+}
+
+/* ---- responsive ---- */
+
+@media (max-width: 1180px) {
+  .music__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .trk {
+    grid-template-columns: 1fr;
+  }
+  .trk__sleeve {
+    max-width: 200px;
+  }
+  .trk__sk--sleeve {
+    grid-row: auto;
+  }
+}

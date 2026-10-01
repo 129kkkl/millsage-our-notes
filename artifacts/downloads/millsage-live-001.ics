@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//millsage fan archive//Our Notes//ZH
+BEGIN:VEVENT
+UID:live-001@millsage.local
+DTSTAMP:20261001T075501Z
+DTSTART;VALUE=DATE:20261225
+DTEND;VALUE=DATE:20261226
+SUMMARY:millsage LIVE 001 「極夜」
+LOCATION:Spotify O-WEST
+DESCRIPTION:全天演出提醒，具体开演时刻及安排请以官方公
+ 告为准。
+URL:https://bang-dream.com/events/millsage_1st/
+END:VEVENT
+END:VCALENDAR

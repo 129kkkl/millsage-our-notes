@@ -1,0 +1,349 @@
+/* ==========================================================================
+   STORY — 极夜 · 电影式滚动叙事
+   明亮 → 暗 → 碎 → 留白。不做滚动劫持。
+   ========================================================================== */
+
+.story {
+  position: relative;
+  background:
+    radial-gradient(90% 30% at 50% 0%, rgba(72, 64, 124, 0.45), transparent 70%),
+    linear-gradient(180deg, var(--night-2) 0%, var(--night-1) 32%, var(--night-1) 72%, var(--night-2) 100%);
+  overflow: clip;
+}
+
+/* 纸面 → 极夜的过渡带 */
+.story__dusk {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: clamp(160px, 22vw, 300px);
+  background: linear-gradient(
+    180deg,
+    var(--paper-mist) 0%,
+    color-mix(in srgb, var(--night-3) 60%, var(--paper-mist)) 42%,
+    var(--night-1) 100%
+  );
+  opacity: 0.96;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.story__field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  transition: opacity var(--t-cine) var(--ease-out);
+}
+
+.story__svg {
+  width: 100%;
+  height: 100%;
+  transition: opacity var(--t-cine) var(--ease-out);
+}
+
+.story__field--bloom {
+  background: radial-gradient(80% 50% at 50% 34%, rgba(120, 132, 190, 0.18), transparent 70%);
+}
+
+.story__field--tide {
+  background: linear-gradient(180deg, rgba(11, 14, 24, 0) 30%, rgba(25, 21, 39, 0.6) 100%);
+}
+
+.story__field--fracture {
+  background: linear-gradient(180deg, rgba(6, 8, 15, 0.7), rgba(25, 21, 39, 0.5));
+}
+
+.story__field--ash {
+  background: linear-gradient(180deg, rgba(33, 28, 51, 0.5), rgba(6, 8, 15, 0.6));
+}
+
+.story__field--residual {
+  background: linear-gradient(180deg, rgba(6, 8, 15, 0.72), rgba(17, 20, 32, 0.4));
+}
+
+.story__crack {
+  animation: story-crack 16s var(--ease-in-out) infinite;
+}
+
+@keyframes story-crack {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateX(6px);
+    opacity: 1;
+  }
+}
+
+.story__res-light {
+  animation: story-res 11s var(--ease-in-out) infinite alternate;
+}
+
+@keyframes story-res {
+  from {
+    opacity: 0.5;
+    transform: scale(0.9);
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.06);
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+}
+
+.story__res-ring {
+  animation: story-ring 9s var(--ease-out) infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes story-ring {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.story__shell {
+  position: relative;
+  z-index: var(--z-content);
+}
+
+/* ---- 剧透状态说明 ---- */
+
+.story__status {
+  display: grid;
+  gap: 10px;
+  padding: clamp(20px, 2.4vw, 32px);
+  border: 1px solid var(--night-hairline-soft);
+  background: rgba(255, 255, 255, 0.02);
+  margin-bottom: clamp(40px, 5vw, 76px);
+  max-width: 78ch;
+}
+
+.story__status-body {
+  font-size: 13px;
+  line-height: 1.95;
+  color: var(--night-ink-2);
+}
+
+.story__status-body strong {
+  color: var(--night-ink);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.story__status-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--night-ink-3);
+}
+
+/* ---- 章节轨 ---- */
+
+.story__rail {
+  display: none;
+  position: fixed;
+  left: max(18px, calc((100vw - var(--maxw)) / 2 - 130px));
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  flex-direction: column;
+  gap: 2px;
+  width: 150px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t-mid) var(--ease-out);
+}
+
+.story__rail[data-on='true'] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.story__rail-item {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  text-align: left;
+  color: var(--night-ink-3);
+  transition:
+    color var(--t-fast) var(--ease-out),
+    letter-spacing var(--t-mid) var(--ease-out);
+}
+
+.story__rail-label {
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+}
+
+.story__rail-line {
+  height: 1px;
+  background: var(--night-hairline);
+  position: relative;
+  transition: background var(--t-fast) var(--ease-out);
+}
+
+.story__rail-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--prism);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-slow) var(--ease-out);
+}
+
+.story__rail-title {
+  grid-column: 1 / -1;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.story__rail-item:hover,
+.story__rail-item[data-active='true'] {
+  color: var(--night-ink);
+}
+
+.story__rail-item[data-active='true'] .story__rail-line::after {
+  transform: scaleX(1);
+}
+
+@media (min-width: 1420px) {
+  .story__rail {
+    display: flex;
+  }
+  /* 章节轨占位，避免与正文重叠（提高一级特异性，避免被 .shell 的 padding-inline 覆盖） */
+  .story .story__shell {
+    padding-left: calc(var(--gutter) + 164px);
+  }
+}
+
+/* ---- 章节 ---- */
+
+.story__list {
+  display: grid;
+  gap: clamp(70px, 9vw, 150px);
+  max-width: 760px;
+}
+
+.story__chapter {
+  min-height: 54svh;
+  display: grid;
+  align-content: center;
+  padding-block: clamp(30px, 5vw, 60px);
+  border-top: 1px solid var(--night-hairline-soft);
+}
+
+.story__chapter:first-child {
+  border-top: 0;
+  min-height: auto;
+}
+
+.story__chapter-head {
+  display: grid;
+  gap: 12px;
+  margin-bottom: clamp(26px, 3.4vw, 46px);
+  max-width: 40ch;
+}
+
+.story__chapter-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.story__chapter-label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: var(--prism);
+}
+
+.story__chapter-labelja {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--night-ink-3);
+}
+
+.story__next {
+  margin-left: auto;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--night-hairline-soft);
+  color: var(--night-ink-2);
+  font-size: 12px;
+  transition:
+    border-color var(--t-fast) var(--ease-out),
+    transform var(--t-mid) var(--ease-out);
+}
+
+.story__next:hover {
+  border-color: var(--prism);
+  transform: translateY(3px);
+}
+
+.story__chapter-title {
+  font-size: clamp(30px, 5.4vw, 72px);
+  line-height: 1.06;
+  color: var(--night-ink);
+  max-width: 20ch;
+}
+
+.story__chapter-sub {
+  font-size: clamp(13px, 1.1vw, 16px);
+  letter-spacing: 0.06em;
+  line-height: 1.8;
+  color: var(--night-ink-2);
+}
+
+.story__chapter-body {
+  max-width: 66ch;
+}
+
+.story__p {
+  color: var(--night-ink-2);
+}
+
+.story__p + .story__p {
+  margin-top: 1.2em;
+}
+
+.story__pull {
+  position: relative;
+  margin-top: clamp(30px, 4vw, 52px);
+  padding-left: clamp(24px, 3vw, 44px);
+  font-size: clamp(20px, 2.6vw, 34px);
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--night-ink);
+  max-width: 26ch;
+}
+
+.story__pull-mark {
+  position: absolute;
+  left: -4px;
+  top: -14px;
+  font-size: 60px;
+  color: var(--prism);
+  opacity: 0.5;
+  font-style: normal;
+}

@@ -1,0 +1,82 @@
+/* ==========================================================================
+   millsage — design tokens
+   视觉矛盾：PURE × FRACTURED / BLESSING × GRIEF / LIGHT × POLAR NIGHT
+   白色不是「空」，是有层次的介质：纸、纱、薄雾、磨砂玻璃、舞台灯、曝光、记忆褪色。
+   ========================================================================== */
+
+:root {
+  /* ---- 纸面（暖白 → 冷白 → 雾灰） ---- */
+  --paper-warm: #f8f6f2;
+  --paper-cool: #f2f4f8;
+  --paper-mist: #e9ebef;
+  --paper-silver: #dcdfe5;
+  --paper-deep: #d2d6de;
+
+  /* ---- 墨 ---- */
+  --ink: #15151a;
+  --ink-2: #40404a;
+  --ink-3: #74747f;
+  --ink-4: #9a9aa5;
+  --hairline: rgba(21, 21, 26, 0.13);
+  --hairline-soft: rgba(21, 21, 26, 0.07);
+
+  /* ---- 极夜（不用纯黑） ---- */
+  --night-0: #06080f;
+  --night-1: #0b0e18;
+  --night-2: #111420;
+  --night-3: #191527;
+  --night-4: #211c33;
+  --night-ink: #e9e9f1;
+  --night-ink-2: #a4a6bd;
+  --night-ink-3: #6f7288;
+  --night-hairline: rgba(233, 233, 241, 0.16);
+  --night-hairline-soft: rgba(233, 233, 241, 0.08);
+
+  /* ---- 极少量虹彩 / 折射 ---- */
+  --prism: #b8a6f4;
+  --prism-cool: #8fb0f2;
+  --prism-warm: #f3c6d6;
+  --carnation: #f4dfe6;
+  --gold: #e6d7b4;
+  --film: rgba(190, 200, 225, 0.5);
+
+  /* ---- 语义色 ---- */
+  --accent: var(--prism);
+  --danger: #c2708a;
+
+  /* ---- 字体 ---- */
+  --font-display: 'Cormorant Garamond', 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho',
+    'Noto Serif JP', Georgia, 'Times New Roman', serif;
+  --font-jp: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP',
+    'Times New Roman', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+
+  /* ---- 节奏 ---- */
+  --t-fast: 320ms;
+  --t-mid: 560ms;
+  --t-slow: 900ms;
+  --t-cine: 1600ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ---- 版式比例 ---- */
+  --measure: 62ch;
+  --gutter: clamp(20px, 5vw, 72px);
+  --maxw: 1440px;
+
+  /* ---- 层级 ---- */
+  --z-art: 0;
+  --z-content: 2;
+  --z-header: 60;
+  --z-menu: 70;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --t-fast: 1ms;
+    --t-mid: 1ms;
+    --t-slow: 1ms;
+    --t-cine: 1ms;
+  }
+}

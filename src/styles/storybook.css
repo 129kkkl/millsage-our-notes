@@ -1,0 +1,99 @@
+.storybook { position:relative; overflow:clip; background:#171c2c; color:#eeedf4; padding-block:100px; }
+.storybook__background { position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse at 90% 5%,#79769c2b,transparent 55%),radial-gradient(ellipse at 4% 80%,#40557525,transparent 40%); }
+.storybook > .shell { position:relative; z-index:1; }
+.storybook__heading { display:flex; justify-content:space-between; align-items:center; gap:35px; }
+.storybook__heading > svg { color:#aba7c7; flex-shrink:0; }
+.storybook .section-head { margin-bottom:35px; }
+.storybook .section-head__title { max-width:900px; }
+.storybook__toolbar { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:22px 0; border-block:1px solid #ffffff20; }
+.storybook .spctl { border-color:#ffffff29; padding:6px 12px; gap:14px; color:#e4e1ec; }
+.storybook .spctl__label { opacity:.9; color:#b6b1c9; font-size:12px; }
+.storybook .spctl__opt { font-size:13px; padding:8px 12px; opacity:.6; }
+.storybook .spctl__opt[data-active='true'] { background:#b8aac42e; opacity:1; }
+.storybook__progress { display:flex; gap:18px; align-items:center; color:#c2bbd0; font-size:13px; }
+.storybook__progress progress { width:120px; height:4px; border:0; background:#ffffff15; accent-color:#b5a4c5; }
+.storybook__progress progress::-webkit-progress-bar { background:#ffffff15; }
+.storybook__progress progress::-webkit-progress-value { background:#b5a4c5; }
+.storybook__perspectives { display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding:20px 0 28px; color:#bab4c9; font-size:13px; }
+.storybook__perspectives > span { margin-right:8px; }
+.storybook__perspectives button { padding:5px 10px; min-height:36px; border:1px solid transparent; border-radius:3px; }
+.storybook__perspectives button[aria-pressed='true'] { border-color:#b8a6ce80; background:#b8a6ce16; color:#f3eff8; }
+.storybook__book { display:grid; grid-template-columns:250px minmax(0,1fr); border:1px solid #aaa2bd42; background:#202539ed; box-shadow:0 20px 60px #0b0e1730; }
+.storybook__contents { min-width:0; padding:25px 18px; border-right:1px solid #ffffff13; background:#191f30; }
+.storybook__contents-label { display:flex; align-items:center; gap:10px; font-size:11px; letter-spacing:.16em; color:#a29bb9; padding:6px 10px 22px; }
+.storybook__contents nav button { display:grid; grid-template-columns:23px 1fr 15px; align-items:center; gap:12px; text-align:left; padding:13px 10px; width:100%; border-left:2px solid transparent; transition:background 200ms; color:#bcb6ce; }
+.storybook__contents nav button:hover { background:#ffffff07; }
+.storybook__contents nav button[aria-current] { color:#f1ecf6; background:linear-gradient(90deg,#b8a6ce20,transparent); border-left-color:#baaccd; }
+.storybook__contents nav button > span:first-child { font-family:var(--font-display); font-size:19px; opacity:.7; }
+.storybook__contents nav button > span:nth-child(2) { font-size:14px; }
+.storybook__contents nav small { display:block; font-size:11px; color:#9893aa; margin-top:3px; }
+.storybook__margin-note { margin:28px 10px 0; padding-top:20px; border-top:1px solid #ffffff16; }
+.storybook__margin-note > span { color:#9d96b3; font-size:10px; letter-spacing:.14em; }
+.storybook__margin-note p { font-size:12px; line-height:1.9; color:#a19ab4; margin-top:12px; }
+.storybook__page { padding:30px clamp(28px,4vw,62px) 23px; min-height:690px; min-width:0; display:flex; flex-direction:column; }
+.storybook__page-top { display:flex; align-items:center; gap:20px; font-size:11px; color:#a6a0b9; letter-spacing:.1em; border-bottom:1px solid #ffffff1c; padding-bottom:20px; }
+.storybook__page-top > .save-button { margin-left:auto; }
+.storybook .save-button { color:#c7bed9; }
+.storybook .save-button[aria-pressed='true'] { color:#eee3ff; }
+.storybook__en { color:#b6aacb; font-size:25px; margin-top:30px; }
+.storybook__page h3 { color:#f0ebf7; font-family:var(--font-jp); font-weight:400; font-size:clamp(25px,2.4vw,36px); letter-spacing:.07em; line-height:1.7; margin:4px 0 8px; }
+.storybook__page h3:focus { outline:none; }
+.storybook__teaser { color:#ada6bf; font-size:14px; margin-bottom:28px; }
+.storybook__chapter-layout { display:grid; grid-template-columns:minmax(0,1fr) 190px; gap:28px; }
+.storybook__paragraphs p { color:#d4cfdf; font-size:16px; line-height:2; }
+.storybook__paragraphs p + p { margin-top:18px; }
+.storybook__figure .sourced-image { aspect-ratio:1; border:1px solid #ffffff16; }
+.storybook__figure img { object-fit:cover; }
+.storybook__figure figcaption { color:#a09ab0; font-size:11px; line-height:1.7; margin-top:10px; }
+.storybook__figure figcaption a { display:block; margin-top:6px; text-decoration:underline; text-underline-offset:3px; }
+.storybook__tags { display:flex; flex-wrap:wrap; gap:10px; font-size:12px; color:#c6bcd6; margin-top:25px; }
+.storybook__tags span { border-bottom:1px solid #c6bcd638; padding-bottom:4px; }
+.storybook__reading-toggle { display:flex; align-items:center; gap:9px; width:100%; padding:16px 0; margin-top:20px; border-block:1px solid #ffffff20; color:#c9bedb; font-size:14px; }
+.storybook__reading-toggle span { margin-left:auto; }
+.storybook__reading { padding:22px; background:#b8a6ce0c; border-bottom:1px solid #ffffff16; }
+.storybook__reading p { color:#c6bed8; font-size:15px; line-height:1.9; }
+.storybook__reading blockquote { font-family:var(--font-jp); margin-top:18px; color:#e4dcef; font-size:17px; }
+.storybook__reading a { font-size:12px; display:inline-block; margin-top:14px; color:#cbbada; border-bottom:1px solid #cbbada66; }
+.storybook__references { display:flex; flex-wrap:wrap; gap:9px 18px; padding-top:23px; font-size:11px; }
+.storybook__references > span { color:#9b95ae; width:100%; }
+.storybook__references > a { color:#b9b1cd; }
+.storybook__references small { display:block; font-size:10px; color:#9d95af; }
+.storybook__read-actions { display:flex; align-items:center; gap:20px; justify-content:space-between; margin-top:26px; }
+.storybook__read-actions .journal-button { font-size:12px; padding:10px 15px; color:#e0d6ed; border-color:#b9a6ca65; background:#b7a6cc12; }
+.storybook__read-actions .journal-button:hover { background:#b7a6cc30; }
+.storybook__read-actions > div { display:flex; flex-wrap:wrap; gap:6px 12px; justify-content:end; }
+.storybook__read-actions > div button { color:#aaa0be; font-size:11px; border-bottom:1px solid #aaa0be45; }
+.storybook__pagination { margin-top:auto; padding-top:25px; display:flex; align-items:center; justify-content:space-between; gap:15px; }
+.storybook__pagination button { padding:12px 0; font-size:13px; color:#c0b4d0; }
+.storybook__pagination button:disabled { color:#7b7489; cursor:default; }
+.storybook__page-flower { color:#857a98; }
+.storybook .gate--locked { background:#a89cbe0c; border-color:#b9a6ca3b; padding:28px; margin:10px 0 30px; }
+.storybook .gate__flag-en { color:#cbb6df; }
+.storybook .gate__flag-zh, .storybook .gate__reason, .storybook .gate__hint { color:#b6abc6; font-size:12px; }
+.storybook .gate__teaser { font-size:14px; line-height:1.9; color:#b6abc6; }
+.storybook .gate__heading { font-size:20px; line-height:1.7; }
+.storybook .gate__btn { background:#c6b6d51a; border-color:#c6b6d566; color:#e9dff3; padding:12px 17px; font-size:14px; }
+.storybook__source-note { display:flex; align-items:start; justify-content:space-between; gap:30px; padding:25px 0; font-size:12px; color:#a8a0b9; }
+.storybook__source-note p { max-width:83ch; line-height:1.9; }
+.storybook__source-note a { white-space:nowrap; color:#c7b9d8; border-bottom:1px solid #c7b9d855; }
+.storybook__interlude { position:relative; height:330px; margin-top:30px; overflow:hidden; }
+.storybook__interlude .sourced-image { height:100%; }
+.storybook__interlude img { object-fit:cover; object-position:50% 56%; opacity:.86; }
+.storybook__interlude figcaption { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:start; padding:35px 50px; background:linear-gradient(90deg,#11182690,transparent 75%); }
+.storybook__interlude figcaption span { max-width:360px; font-size:clamp(35px,4vw,62px); font-family:var(--font-display); line-height:1.12; color:#eee9f1; }
+.storybook__interlude small { font-size:11px; margin-top:30px; color:#c7c0d0; }
+@media(max-width:1100px) { .storybook__book { grid-template-columns:215px minmax(0,1fr); } .storybook__chapter-layout { grid-template-columns:1fr; } .storybook__figure { display:grid; grid-template-columns:110px 1fr; gap:15px; align-items:center; } .storybook__figure figcaption { max-width:38ch; } .storybook__read-actions { flex-wrap:wrap; } }
+@media(max-width:760px) {
+ .storybook { padding-block:70px; } .storybook__heading > svg { display:none; }
+ .storybook__book { grid-template-columns:minmax(0,1fr); } .storybook__contents { padding:16px 12px; border-right:0; border-bottom:1px solid #ffffff17; }
+ .storybook__contents-label { display:none; } .storybook__contents ol { display:flex; overflow-x:auto; gap:7px; padding-bottom:6px; }
+ .storybook__contents li { flex:0 0 155px; } .storybook__contents nav button { padding:8px 7px; gap:8px; } .storybook__contents nav button > span:nth-child(2) { font-size:12px; }
+ .storybook__contents nav small { font-size:10px; } .storybook__margin-note { display:none; }
+ .storybook__page { padding:20px; min-height:600px; } .storybook__page-top { font-size:10px; gap:10px; } .storybook__en { font-size:23px; margin-top:24px; }
+ .storybook__toolbar { flex-wrap:wrap; gap:18px; } .storybook__progress { width:100%; justify-content:space-between; } .storybook__progress progress { width:50%; }
+ .storybook__perspectives { gap:7px; font-size:12px; } .storybook__perspectives > span { width:100%; margin-bottom:5px; } .storybook__perspectives button { padding:5px 7px; }
+ .storybook__paragraphs p { font-size:15px; line-height:2; } .storybook__page h3 { font-size:25px; } .storybook__teaser { font-size:13px; }
+ .storybook__references { font-size:11px; gap:12px; } .storybook__source-note { flex-direction:column; gap:12px; }
+ .storybook .gate--locked { padding:20px 16px; } .storybook .gate__btn { font-size:13px; padding:10px 12px; }
+ .storybook__interlude { height:300px; margin-top:15px; } .storybook__interlude figcaption { padding:28px; } .storybook__interlude figcaption span { max-width:220px; font-size:39px; }
+}

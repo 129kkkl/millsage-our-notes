@@ -1,0 +1,226 @@
+[
+  {
+    "id": "hotaru-casual",
+    "status": 200,
+    "ok": true,
+    "type": "image/webp",
+    "attempts": 1
+  },
+  {
+    "id": "natsume-stage",
+    "status": 200,
+    "ok": true,
+    "type": "image/webp",
+    "attempts": 1
+  },
+  {
+    "id": "key-visual",
+    "status": 200,
+    "ok": true,
+    "type": "image/webp",
+    "attempts": 1
+  },
+  {
+    "id": "hotaru-stage",
+    "status": 200,
+    "ok": true,
+    "type": "image/webp",
+    "attempts": 1
+  },
+  {
+    "id": "natsume-casual",
+    "ok": false,
+    "error": "ECONNRESET",
+    "attempts": 3
+  },
+  {
+    "id": "nagi-casual",
+    "status": 200,
+    "ok": true,
+    "type": "image/webp",
+    "attempts": 1
+  },
+  {
+    "id": "mahoro-stage",
+    "status": 200,
+    "ok": true,
+    "type": "image/webp",
+    "attempts": 1
+  },
+  {
+    "id": "nagi-stage",
+    "ok": false,
+    "error": "ECONNRESET",
+    "attempts": 3
+  },
+  {
+    "id": "houka-stage",
+    "ok": false,
+    "error": "ECONNRESET",
+    "attempts": 3
+  },
+  {
+    "id": "mahoro-casual",
+    "status": 200,
+    "ok": true,
+    "type": "image/webp",
+    "attempts": 3
+  },
+  {
+    "id": "houka-casual",
+    "status": 200,
+    "ok": true,
+    "type": "image/webp",
+    "attempts": 3
+  },
+  {
+    "id": "sleeve-everscape",
+    "status": 200,
+    "ok": true,
+    "type": "image/jpeg",
+    "attempts": 1
+  },
+  {
+    "id": "sleeve-carnation",
+    "status": 200,
+    "ok": true,
+    "type": "image/png",
+    "attempts": 1
+  },
+  {
+    "id": "sleeve-kishikaisen",
+    "status": 200,
+    "ok": true,
+    "type": "image/jpeg",
+    "attempts": 1
+  },
+  {
+    "id": "sleeve-narasu",
+    "status": 200,
+    "ok": true,
+    "type": "image/jpeg",
+    "attempts": 3
+  },
+  {
+    "id": "sleeve-stellarstellar",
+    "status": 200,
+    "ok": true,
+    "type": "image/jpeg",
+    "attempts": 1
+  },
+  {
+    "id": "sleeve-aonosumika",
+    "status": 200,
+    "ok": true,
+    "type": "image/jpeg",
+    "attempts": 1
+  },
+  {
+    "id": "hotaru-artist",
+    "status": 200,
+    "ok": true,
+    "type": "image/webp",
+    "attempts": 1
+  },
+  {
+    "id": "sleeve-unravel",
+    "status": 200,
+    "ok": true,
+    "type": "image/jpeg",
+    "attempts": 3
+  },
+  {
+    "id": "natsume-artist",
+    "status": 200,
+    "ok": true,
+    "type": "image/webp",
+    "attempts": 1
+  },
+  {
+    "id": "nagi-artist",
+    "status": 200,
+    "ok": true,
+    "type": "image/webp",
+    "attempts": 1
+  },
+  {
+    "id": "mahoro-artist",
+    "status": 200,
+    "ok": true,
+    "type": "image/webp",
+    "attempts": 1
+  },
+  {
+    "id": "band-intro-art",
+    "status": 200,
+    "ok": true,
+    "type": "image/webp",
+    "attempts": 3
+  },
+  {
+    "id": "film-story-trailer",
+    "status": 200,
+    "ok": true,
+    "type": "image/jpeg",
+    "attempts": 1
+  },
+  {
+    "id": "houka-artist",
+    "status": 200,
+    "ok": true,
+    "type": "image/webp",
+    "attempts": 1
+  },
+  {
+    "id": "video-BV1XTbZ6REEY",
+    "status": 200,
+    "ok": true,
+    "type": "image/jpeg",
+    "attempts": 1
+  },
+  {
+    "id": "video-4dBoXrtaSJk",
+    "status": 200,
+    "ok": true,
+    "type": "image/jpeg",
+    "attempts": 1
+  },
+  {
+    "id": "video-6OeuA3UWPRg",
+    "status": 200,
+    "ok": true,
+    "type": "image/jpeg",
+    "attempts": 1
+  },
+  {
+    "id": "film-animation",
+    "ok": false,
+    "error": "ECONNRESET",
+    "attempts": 3
+  },
+  {
+    "id": "film-introduction",
+    "ok": false,
+    "error": "ECONNRESET",
+    "attempts": 3
+  },
+  {
+    "id": "video-FOfAu3lW1qg",
+    "ok": false,
+    "error": "ECONNRESET",
+    "attempts": 3
+  },
+  {
+    "id": "video-yLM6PcfD-_Y",
+    "ok": false,
+    "error": "ECONNRESET",
+    "attempts": 3
+  },
+  {
+    "id": "video-ygfd-2Be0DA",
+    "status": 200,
+    "ok": true,
+    "type": "image/jpeg",
+    "attempts": 1
+  }
+]

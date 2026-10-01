@@ -1,0 +1,424 @@
+/* ==========================================================================
+   ui primitives
+   ========================================================================== */
+
+/* ---- Reveal ---- */
+
+.reveal {
+  transition:
+    opacity var(--t-slow) var(--ease-out),
+    transform var(--t-slow) var(--ease-out),
+    filter var(--t-slow) var(--ease-out);
+}
+
+.reveal[data-shown='false'] {
+  opacity: 0;
+}
+
+.reveal--up[data-shown='false'] {
+  transform: translate3d(0, 22px, 0);
+}
+
+.reveal--fade[data-shown='false'] {
+  opacity: 0;
+  transform: none;
+}
+
+.reveal--focus[data-shown='false'] {
+  opacity: 0;
+  filter: blur(9px);
+  transform: scale(1.012);
+}
+
+/* 注意：这里不能用 clip-path: inset(0 0 100% 0) 表示「尚未揭示」。
+   Chrome 的 IntersectionObserver 会把被 clip-path 完全裁掉的元素判定为
+   不相交（intersectionRatio = 0），这类元素将永远无法揭示自己。
+   因此 mask 变体改用位移 + 纵向压缩模拟「幕布升起」。 */
+.reveal--mask[data-shown='false'] {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0) scaleY(0.94);
+  transform-origin: bottom center;
+}
+
+.reveal[data-shown='true'] {
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+
+/* ---- Provenance ---- */
+
+.prov {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 2px 9px;
+  border: 1px solid currentColor;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  line-height: 1.6;
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.prov__en {
+  color: inherit;
+}
+
+.prov__zh {
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  opacity: 0.66;
+}
+
+.prov--canon {
+  color: var(--ink-2);
+  background: color-mix(in srgb, var(--gold) 22%, transparent);
+}
+
+.prov--story {
+  color: var(--ink-2);
+  background: color-mix(in srgb, var(--prism) 18%, transparent);
+}
+
+.prov--interpretation {
+  color: var(--ink-3);
+  border-style: solid;
+  border-color: color-mix(in srgb, currentColor 45%, transparent);
+}
+
+.prov--theory {
+  color: var(--ink-3);
+  border-style: dashed;
+}
+
+.prov--compact {
+  padding: 1px 6px;
+  font-size: 8.5px;
+}
+
+.prov-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--ink-3);
+  max-width: 60ch;
+}
+
+.on-night .prov-note,
+.on-night .prov {
+  color: var(--night-ink-2);
+}
+
+.unconfirmed {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border: 1px dashed color-mix(in srgb, var(--danger) 60%, transparent);
+  color: var(--danger);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  line-height: 1.7;
+  white-space: nowrap;
+}
+
+.on-night .unconfirmed {
+  color: #d99bb0;
+  border-color: rgba(217, 155, 176, 0.45);
+}
+
+/* ---- Spoiler gate ---- */
+
+.gate {
+  position: relative;
+}
+
+.gate--locked {
+  padding: clamp(26px, 3.4vw, 46px);
+  border: 1px solid var(--hairline);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--prism) 7%, transparent), transparent 70%),
+    color-mix(in srgb, var(--paper-mist) 45%, transparent);
+}
+
+.gate--night.gate--locked {
+  background:
+    linear-gradient(180deg, rgba(184, 166, 244, 0.09), transparent 70%),
+    rgba(233, 233, 241, 0.045);
+  border-color: var(--night-hairline);
+  backdrop-filter: blur(2px);
+}
+
+.gate__stripe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: repeating-linear-gradient(
+    180deg,
+    var(--prism) 0 6px,
+    transparent 6px 12px
+  );
+  opacity: 0.65;
+}
+
+.gate__flag {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.gate__flag-en {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--ink);
+  border: 1px solid currentColor;
+  padding: 2px 9px;
+}
+
+.gate__flag-zh {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  color: var(--ink-3);
+}
+
+.gate__heading {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.4vw, 30px);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.gate__teaser {
+  font-size: 13.5px;
+  line-height: 1.9;
+  color: var(--ink-2);
+  max-width: 56ch;
+}
+
+.gate__reason {
+  margin-top: 14px;
+  font-size: 11.5px;
+  line-height: 1.8;
+  color: var(--ink-3);
+  max-width: 56ch;
+}
+
+.gate__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  margin-top: 26px;
+  padding-top: 20px;
+  border-top: 1px solid var(--hairline);
+}
+
+.gate__btn {
+  position: relative;
+  padding: 11px 20px;
+  border: 1px solid var(--hairline);
+  background: color-mix(in srgb, var(--paper-warm) 60%, transparent);
+  transition:
+    border-color var(--t-mid) var(--ease-out),
+    background var(--t-mid) var(--ease-out);
+}
+
+.gate--night .gate__btn {
+  color: var(--night-ink);
+  border-color: var(--night-hairline);
+  background: rgba(233, 233, 241, 0.06);
+}
+
+.gate__btn:hover {
+  border-color: color-mix(in srgb, var(--prism) 70%, transparent);
+  background: color-mix(in srgb, var(--prism) 12%, transparent);
+}
+
+.gate__btn-line {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  transition: letter-spacing var(--t-mid) var(--ease-out);
+}
+
+.gate__btn:hover .gate__btn-line {
+  letter-spacing: 0.27em;
+}
+
+.gate__hint {
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--ink-4);
+}
+
+/* ---- Figure ---- */
+
+.figure {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.figure__frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  background: linear-gradient(160deg, var(--paper-cool), var(--paper-mist));
+  aspect-ratio: 4 / 5;
+}
+
+.figure--night .figure__frame {
+  background: linear-gradient(160deg, var(--night-2), var(--night-3));
+  border-color: var(--night-hairline);
+}
+
+.figure__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.figure__fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0.9;
+}
+
+.figure__mark {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 8.5px;
+  letter-spacing: 0.24em;
+  color: var(--ink-4);
+}
+
+.figure--night .figure__mark {
+  color: var(--night-ink-3);
+}
+
+.figure[data-state='error'] .figure__mark {
+  color: var(--danger);
+}
+
+.figure__corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 1px solid color-mix(in srgb, var(--prism) 55%, transparent);
+  opacity: 0.7;
+}
+
+.figure__corner--tl {
+  left: 8px;
+  top: 8px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.figure__corner--br {
+  right: 8px;
+  bottom: 8px;
+  border-left: 0;
+  border-top: 0;
+}
+
+.figure__caption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 16px;
+  font-size: 10.5px;
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+
+.figure__rights {
+  letter-spacing: 0.16em;
+  color: var(--ink-4);
+}
+
+/* ---- Official links ---- */
+
+.official-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 30px;
+}
+
+.official-links__none {
+  display: grid;
+  gap: 4px;
+  padding: 12px 16px;
+  border: 1px dashed var(--hairline);
+  max-width: 46ch;
+}
+
+.official-links__none-en {
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  color: var(--ink-4);
+}
+
+.official-links__none-zh {
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+
+.on-night .official-links__none {
+  border-color: var(--night-hairline-soft);
+}
+
+/* ---- 资料行 ---- */
+
+.kv {
+  display: grid;
+  grid-template-columns: minmax(76px, 22%) 1fr;
+  gap: 6px 20px;
+  padding: 11px 0;
+  border-top: 1px solid var(--hairline-soft);
+  align-items: baseline;
+}
+
+.kv__k {
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  line-height: 2;
+}
+
+.kv__v {
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: var(--ink-2);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.kv__v--na {
+  color: var(--ink-4);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.on-night .kv__v {
+  color: var(--night-ink-2);
+}

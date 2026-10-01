@@ -1,0 +1,857 @@
+/* ==========================================================================
+   art — 花瓣 / 五线谱 / 虹彩 / 成员标记 / 封面母题 / 波形 / 主题构图
+   动画总原则：300–900ms 为主，Story 类转场可以更慢；全部尊重 reduced-motion。
+   ========================================================================== */
+
+/* ---- 花瓣 ---- */
+
+.petals {
+  position: absolute;
+  inset: -12% -8% -12% -8%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.petals__p {
+  position: absolute;
+  top: 0;
+  display: block;
+  border-radius: 60% 40% 62% 38% / 58% 60% 40% 42%;
+  background: linear-gradient(118deg, #ffffff 8%, rgba(244, 223, 230, 0.9) 42%, rgba(184, 166, 244, 0.6) 100%);
+  box-shadow: 0 1px 6px rgba(180, 180, 200, 0.28);
+  will-change: transform;
+  animation-name: petal-drift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.petals--night .petals__p {
+  background: linear-gradient(118deg, rgba(233, 233, 241, 0.75) 6%, rgba(184, 166, 244, 0.5) 48%, rgba(143, 176, 242, 0.35) 100%);
+  box-shadow: 0 0 10px rgba(184, 166, 244, 0.28);
+}
+
+@keyframes petal-drift {
+  0% {
+    transform: translate3d(0, -14vh, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(calc(var(--dx) * 0.5), 52vh, 0) rotate(calc(var(--spin) * 0.5));
+  }
+  100% {
+    transform: translate3d(var(--dx), 118vh, 0) rotate(var(--spin));
+  }
+}
+
+/* ---- 五线谱 ---- */
+
+.staff {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 54px;
+  color: var(--ink);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.on-night .staff {
+  color: var(--night-ink);
+}
+
+/* ---- 虹彩折射 ---- */
+
+.sheen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: soft-light;
+}
+
+.sheen__band {
+  position: absolute;
+  width: 60%;
+  height: 180%;
+  filter: blur(38px);
+  opacity: 0.55;
+}
+
+.sheen--paper .sheen__band {
+  background: linear-gradient(100deg, rgba(184, 166, 244, 0.5), rgba(255, 255, 255, 0) 62%);
+}
+
+.sheen--night .sheen__band {
+  background: linear-gradient(100deg, rgba(143, 176, 242, 0.34), rgba(255, 255, 255, 0) 62%);
+  mix-blend-mode: screen;
+}
+
+.sheen__band--a {
+  left: -14%;
+  top: -40%;
+  animation: sheen-a 26s var(--ease-in-out) infinite;
+}
+
+.sheen__band--b {
+  left: 26%;
+  top: -46%;
+  opacity: 0.38;
+  animation: sheen-b 34s var(--ease-in-out) infinite;
+}
+
+.sheen__band--c {
+  left: 58%;
+  top: -38%;
+  opacity: 0.3;
+  animation: sheen-a 42s var(--ease-in-out) infinite reverse;
+}
+
+@keyframes sheen-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-8deg);
+  }
+  50% {
+    transform: translate3d(9%, 5%, 0) rotate(-2deg);
+  }
+}
+
+@keyframes sheen-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(6deg);
+  }
+  50% {
+    transform: translate3d(-7%, 6%, 0) rotate(0deg);
+  }
+}
+
+/* ---- 成员标记 ---- */
+
+.mark {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 400 / 520;
+  transition: opacity var(--t-slow) var(--ease-out), filter var(--t-slow) var(--ease-out);
+}
+
+.mark[data-dim='true'] {
+  opacity: 0.32;
+  filter: saturate(0.5);
+}
+
+.mark svg {
+  width: 100%;
+  height: 100%;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, var(--hairline));
+}
+
+.mark__crack {
+  animation: crack-shift 14s var(--ease-in-out) infinite;
+}
+
+@keyframes crack-shift {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translateX(2.5px);
+    opacity: 1;
+  }
+}
+
+.mark__sigil {
+  animation: sigil-breathe 9s var(--ease-in-out) infinite;
+}
+
+@keyframes sigil-breathe {
+  0%,
+  100% {
+    opacity: 0.62;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+.mark__plate {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 40%);
+  backdrop-filter: blur(2px);
+}
+
+.mark__no {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+}
+
+.mark__name {
+  font-size: 14px;
+  color: var(--ink);
+  margin-right: auto;
+}
+
+.mark__inst {
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* ---- 封面母题 ---- */
+
+.sleeve {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+}
+
+.sleeve svg {
+  width: 100%;
+  height: 100%;
+  transition: transform var(--t-cine) var(--ease-out);
+}
+
+.sleeve[data-art='burst'] svg {
+  animation: sleeve-shift 8s var(--ease-in-out) infinite alternate;
+}
+
+.sleeve[data-art='carnation'] svg {
+  animation: sleeve-turn 44s linear infinite;
+}
+
+.sleeve[data-art='escape'] svg {
+  animation: sleeve-shift 12s var(--ease-in-out) infinite alternate;
+}
+
+.sleeve[data-art='resonance'] svg {
+  animation: sleeve-breathe 7s var(--ease-in-out) infinite alternate;
+}
+
+@keyframes sleeve-shift {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.06) translate3d(-1.5%, -1%, 0);
+  }
+}
+
+@keyframes sleeve-turn {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sleeve-breathe {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.045);
+  }
+}
+
+/* ---- 波形母题 ---- */
+
+.wave {
+  display: grid;
+  gap: 10px;
+}
+
+.wave__bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 54px;
+  border-bottom: 1px solid var(--hairline);
+  padding-bottom: 1px;
+}
+
+.wave__bar {
+  flex: 1;
+  min-width: 1px;
+  background: linear-gradient(180deg, rgba(184, 166, 244, 0.05), rgba(184, 166, 244, 0.7));
+  transform-origin: bottom;
+  animation: wave-pulse 3s var(--ease-in-out) infinite alternate;
+}
+
+.wave[data-motion='sharp'] .wave__bar {
+  background: linear-gradient(180deg, rgba(243, 198, 214, 0.1), rgba(207, 142, 166, 0.85));
+}
+
+.wave[data-motion='slow'] .wave__bar {
+  background: linear-gradient(180deg, rgba(244, 223, 230, 0.1), rgba(214, 176, 190, 0.6));
+}
+
+.wave[data-motion='swell'] .wave__bar {
+  background: linear-gradient(180deg, rgba(143, 176, 242, 0.08), rgba(143, 176, 242, 0.7));
+}
+
+.wave__note {
+  display: block;
+  line-height: 1.7;
+  color: var(--ink-4);
+  text-transform: none;
+  letter-spacing: 0.06em;
+  max-width: 52ch;
+}
+
+.wave__note strong {
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.on-night .wave__note {
+  color: var(--night-ink-3);
+}
+
+.on-night .wave__note strong {
+  color: var(--night-ink-2);
+}
+
+@keyframes wave-pulse {
+  from {
+    transform: scaleY(0.34);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* ==========================================================================
+   Theme Canvas
+   ========================================================================== */
+
+.tcanvas {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--hairline);
+  background:
+    radial-gradient(120% 100% at 50% 0%, rgba(255, 255, 255, 0.9), rgba(233, 235, 239, 0.6) 62%, rgba(210, 214, 222, 0.7));
+  overflow: hidden;
+}
+
+.tcanvas svg {
+  width: 100%;
+  height: 100%;
+}
+
+.on-night .tcanvas {
+  border-color: var(--night-hairline);
+  background:
+    radial-gradient(120% 100% at 50% 0%, rgba(60, 66, 96, 0.55), rgba(11, 14, 24, 0.9) 68%);
+}
+
+.tc-bed {
+  fill: transparent;
+}
+
+.tc-grid line {
+  stroke: var(--ink);
+  stroke-width: 0.4;
+  opacity: 0.07;
+}
+
+.on-night .tc-grid line {
+  stroke: var(--night-ink);
+  opacity: 0.07;
+}
+
+.tc-frame {
+  stroke: var(--hairline);
+  stroke-width: 1;
+}
+
+.tc-core {
+  fill: #ffffff;
+  stroke: rgba(21, 21, 26, 0.28);
+  stroke-width: 0.6;
+}
+
+.on-night .tc-core {
+  stroke: rgba(233, 233, 241, 0.3);
+}
+
+.tc-wire {
+  stroke: rgba(21, 21, 26, 0.32);
+  stroke-width: 0.8;
+  fill: none;
+}
+
+.on-night .tc-wire {
+  stroke: rgba(233, 233, 241, 0.3);
+}
+
+.tc-wire--dashed {
+  stroke-dasharray: 3 5;
+}
+
+.tc-tiny {
+  font-size: 8px;
+  letter-spacing: 0.24em;
+  fill: var(--ink-4);
+  font-family: var(--font-sans);
+}
+
+.on-night .tc-tiny {
+  fill: var(--night-ink-3);
+}
+
+.tc-holes {
+  stroke: rgba(21, 21, 26, 0.22);
+  stroke-width: 0.7;
+}
+
+.on-night .tc-holes {
+  stroke: rgba(233, 233, 241, 0.22);
+}
+
+/* --- 01 happiness --- */
+
+@keyframes tc-in {
+  from {
+    transform: translate(var(--from-x), var(--from-y));
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+.tc-happy {
+  animation: tc-in 2.4s var(--ease-out) both;
+}
+
+.tc-halo {
+  fill: none;
+  stroke: rgba(184, 166, 244, 0.7);
+  stroke-width: 0.6;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tc-pulse 5.5s var(--ease-in-out) infinite;
+}
+
+@keyframes tc-pulse {
+  from {
+    transform: scale(0.7);
+    opacity: 0.15;
+  }
+  to {
+    transform: scale(1.32);
+    opacity: 0.75;
+  }
+}
+
+/* --- 02 talent --- */
+
+.tc-ring {
+  fill: none;
+  stroke: url(#tc-prism);
+  stroke-width: 0.9;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tc-ring 7s var(--ease-in-out) infinite;
+}
+
+@keyframes tc-ring {
+  0% {
+    transform: scale(0.3);
+    opacity: 0.1;
+  }
+  55% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.tc-core-bloom {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tc-bloom 4.6s var(--ease-in-out) infinite alternate;
+}
+
+@keyframes tc-bloom {
+  from {
+    transform: scale(0.86);
+    opacity: 0.75;
+  }
+  to {
+    transform: scale(1.14);
+    opacity: 1;
+  }
+}
+
+@keyframes tc-dim {
+  0%,
+  30% {
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  70%,
+  100% {
+    opacity: 0.95;
+  }
+}
+
+.tc-weak {
+  animation: tc-dim 7s var(--ease-in-out) infinite;
+}
+
+/* --- 03 ordinary --- */
+
+.tc-mark {
+  fill: rgba(21, 21, 26, 0.5);
+  animation: tc-pass 7s linear infinite;
+}
+
+@keyframes tc-pass {
+  0%,
+  5% {
+    opacity: 0.95;
+  }
+  18%,
+  86% {
+    opacity: 0.14;
+  }
+  96%,
+  100% {
+    opacity: 0.95;
+  }
+}
+
+.tc-mark--odd {
+  fill: rgba(21, 21, 26, 0.34);
+  opacity: 0.28;
+  animation: none;
+}
+
+.on-night .tc-mark {
+  fill: rgba(233, 233, 241, 0.62);
+}
+
+.on-night .tc-mark--odd {
+  fill: rgba(233, 233, 241, 0.4);
+}
+
+.tc-scan line {
+  stroke: url(#tc-prism);
+  stroke-width: 1.1;
+  transform-box: view-box;
+  animation: tc-scan 7s linear infinite;
+}
+
+@keyframes tc-scan {
+  from {
+    transform: translateX(60px);
+  }
+  to {
+    transform: translateX(284px);
+  }
+}
+
+/* --- 04 blessing --- */
+
+@keyframes tc-fall {
+  from {
+    transform: translate(0px, -30px) rotate(0deg);
+  }
+  to {
+    transform: translate(14px, 300px) rotate(210deg);
+  }
+}
+
+.tc-petal {
+  animation-name: tc-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.tc-petal--heavy {
+  animation-name: tc-fall-heavy;
+  animation-duration: 3.4s;
+}
+
+@keyframes tc-fall-heavy {
+  from {
+    transform: translate(0px, -30px) scale(1.1);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  to {
+    transform: translate(0px, 300px) scale(1.1);
+    opacity: 0.9;
+  }
+}
+
+/* --- 05 grief --- */
+
+.tc-flower {
+  transform: translate(200px, 116px);
+  transform-box: view-box;
+  animation: tc-breathe 8s var(--ease-in-out) infinite alternate;
+}
+
+@keyframes tc-breathe {
+  from {
+    opacity: 0.62;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tc-fall {
+  animation: tc-drop 9s var(--ease-in-out) 1.2s infinite;
+}
+
+.tc-fall--2 {
+  animation-delay: 4.4s;
+  opacity: 0.7;
+}
+
+@keyframes tc-drop {
+  0% {
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.9;
+  }
+  70% {
+    opacity: 0.5;
+    transform: translate(200px, 116px) translate(-24px, 150px) rotate(-70deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(200px, 116px) translate(-34px, 230px) rotate(-120deg);
+  }
+}
+
+/* --- 06 memory --- */
+
+.tc-photo {
+  animation: tc-mem 11s var(--ease-in-out) infinite;
+}
+
+@keyframes tc-mem {
+  0% {
+    opacity: 0.45;
+  }
+  38% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.tc-overexpose {
+  animation: tc-over 11s var(--ease-in-out) infinite;
+  mix-blend-mode: screen;
+}
+
+@keyframes tc-over {
+  0%,
+  14% {
+    opacity: 0;
+  }
+  42% {
+    opacity: 0.96;
+  }
+  64% {
+    opacity: 0.5;
+  }
+  78%,
+  100% {
+    opacity: 0.08;
+  }
+}
+
+.tc-crackline {
+  animation: tc-crack 11s var(--ease-in-out) infinite;
+}
+
+@keyframes tc-crack {
+  0%,
+  66% {
+    opacity: 0;
+  }
+  84%,
+  100% {
+    opacity: 1;
+  }
+}
+
+.tc-sprocket {
+  animation: tc-sprocket 11s var(--ease-in-out) infinite;
+}
+
+@keyframes tc-sprocket {
+  0%,
+  20% {
+    opacity: 1;
+  }
+  44% {
+    opacity: 0.5;
+  }
+  70%,
+  100% {
+    opacity: 1;
+  }
+}
+
+/* --- 07 guilt --- */
+
+.tc-silhouette {
+  fill: rgba(21, 21, 26, 0.14);
+  stroke: rgba(21, 21, 26, 0.5);
+  stroke-width: 0.9;
+  animation: tc-sil 6.5s var(--ease-in-out) infinite alternate;
+}
+
+.tc-ghost {
+  fill: rgba(184, 166, 244, 0.1);
+  stroke: rgba(184, 166, 244, 0.65);
+  stroke-width: 0.8;
+  stroke-dasharray: 3 4;
+  animation: tc-lag 6.5s var(--ease-in-out) infinite alternate;
+  animation-delay: 0.42s;
+}
+
+@keyframes tc-sil {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(1.5px, -2px);
+  }
+}
+
+@keyframes tc-lag {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(38px, -34px);
+  }
+}
+
+.on-night .tc-silhouette {
+  fill: rgba(233, 233, 241, 0.1);
+  stroke: rgba(233, 233, 241, 0.5);
+}
+
+.on-night .tc-ghost {
+  fill: rgba(184, 166, 244, 0.1);
+  stroke: rgba(184, 166, 244, 0.6);
+}
+
+/* --- 08 life --- */
+
+.tc-pulse {
+  fill: none;
+  stroke: url(#tc-prism);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1100;
+  stroke-dashoffset: 1100;
+  animation: tc-draw 6.4s linear infinite;
+}
+
+@keyframes tc-draw {
+  0% {
+    stroke-dashoffset: 1100;
+  }
+  52% {
+    stroke-dashoffset: 520;
+  }
+  57% {
+    stroke-dashoffset: 520;
+  }
+  64% {
+    stroke-dashoffset: 500;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.tc-beat {
+  transform-box: view-box;
+  transform-origin: 190px 150px;
+  animation: tc-beat 6.4s var(--ease-out) infinite;
+}
+
+@keyframes tc-beat {
+  0%,
+  46% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  58% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+  78%,
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+/* --- reduced motion：停在有意义的静态构图 --- */
+
+.tcanvas[data-reduced='true'] * {
+  animation: none !important;
+}
+
+.tcanvas[data-reduced='true'] .tc-mark {
+  opacity: 0.6;
+}
+
+.tcanvas[data-reduced='true'] .tc-mark--odd {
+  opacity: 0.28;
+}
+
+.tcanvas[data-reduced='true'] .tc-weak {
+  opacity: 0.7;
+}
+
+.tcanvas[data-reduced='true'] .tc-crackline {
+  opacity: 1;
+}
+
+.tcanvas[data-reduced='true'] .tc-pulse {
+  stroke-dashoffset: 0;
+}
+
+.tcanvas[data-reduced='true'] .tc-petal,
+.tcanvas[data-reduced='true'] .tc-fall {
+  opacity: 0.6;
+}
